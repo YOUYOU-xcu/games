@@ -80,13 +80,13 @@
 				margin-left: 3px;
 			}
 		</style>
-		<script type="text/javascript" src="${path}/js/jquery.min.js"></script>
+		<script type="text/javascript" src="${js}/jquery.min.js"></script>
   </head>
   
   <body>
    	<div id="context">
    
-   	<a href="${path}">回到首页</a>|<a href="${path}/user/cart/list">浏览购物车</a>
+   	<a href="${path}">回到首页</a>|<a href="${path}/u/cartList">浏览购物车</a>
 			<div id="goods">
 				<div id="goods_img">
 					<img src="${upload}/${product.proimg}" id="main_img" /><br>
@@ -103,10 +103,31 @@
 					</div>
 					<div id="edit">
 						<input type="hidden" value="${product.id}" id="proId"/>
-						<input type="button" id="cart" value="加入购物车" />
+						<input type="button" id="addcart" value="加入购物车" onclick="add()"/>
 					</div>
 				</div>
 			</div>
 		</div>
   </body>
+  <script type="text/javascript">
+	  function add() {
+		 var proId = $("#proId").attr("value");
+		  // alert(proId)
+		  $.ajax({
+			  url:"${path}/u/addCart",
+			  type:"GET",
+			  data:{"proId":proId},
+			  success:function (result) {
+			  	if (result=="failure"){
+			  		alert("您还未登录，请先登录！")
+					location.href="${path}/user/login.jsp"
+				}else {
+			  		alert("您已成功添加此商品")
+				}
+			  },
+			  datatype:"text"
+		  });
+	  }
+
+  </script>
 </html>

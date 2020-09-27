@@ -36,7 +36,7 @@
 							欢迎您：${user.username}
 							&emsp;
 							<a href="${path}/u/cartList">[我的购物车]</a>&emsp;
-							<a href="#">[我的订单]</a>&emsp;
+							<a href="${path}/u/orderList">[我的订单]</a>&emsp;
 							<a href="${path}/u/logout">退出</a>
 						</div>
 					</c:if>

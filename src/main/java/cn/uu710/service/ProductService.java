@@ -1,5 +1,6 @@
 package cn.uu710.service;
 
+import cn.uu710.domain.Cart;
 import cn.uu710.domain.Product;
 
 import java.util.List;
@@ -13,4 +14,7 @@ import java.util.List;
 public interface ProductService {
     List<Product> findAllProduct();
     Product detailsOne(String id);
+
+    List<Cart> findCart(String id);
+    void addCart(String proId,int userId);
 }

@@ -1,7 +1,10 @@
 package cn.uu710.web.servlet;
 
+import cn.uu710.domain.Cart;
 import cn.uu710.domain.User;
+import cn.uu710.service.ProductService;
 import cn.uu710.service.UserService;
+import cn.uu710.service.impl.ProductServiceImpl;
 import cn.uu710.service.impl.UserServiceImpl;
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -10,7 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,6 +25,7 @@ import java.util.Map;
  */
 @WebServlet("/u/*")
 public class UserServlet extends BaseServlet {
+    private ProductService productService = new ProductServiceImpl();
     private UserService userService = new UserServiceImpl();
     private User user = new User();
 
@@ -62,6 +68,48 @@ public class UserServlet extends BaseServlet {
             e.printStackTrace();
         }
     }
+
+    public void cartList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String findCart = request.getParameter("proId");
+        System.out.println("进来了findCart……"+findCart);
+        List<Cart> cartList = productService.findCart(findCart);
+        System.out.println("cartList======="+cartList);
+
+        request.getSession().setAttribute("cartList",cartList);
+
+    }
+
+    public void orderList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String findCart = request.getParameter("proId");
+        System.out.println("进来了findCart……"+findCart);
+        List<Cart> cartList = productService.findCart(findCart);
+        System.out.println("cartList======="+cartList);
+
+        request.getSession().setAttribute("cartList",cartList);
+
+    }
+
+    public void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        System.out.println(request.getSession().getAttribute("user")+"正在执行添加购物车……");
+//        判断用户是否已经登录
+        User uu = (User) request.getSession().getAttribute("user");
+        if (uu==null){//未登录
+            out.write("failure");
+            return;
+        }
+
+        String proId = request.getParameter("proId");
+        System.out.println("进来了proId……"+proId);
+        productService.addCart(proId, uu.getId());
+        out.write("success");
+
+//        request.getSession().setAttribute("cartList",cartList);
+
+    }
+
 /*
 
     public void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

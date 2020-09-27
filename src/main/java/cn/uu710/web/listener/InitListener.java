@@ -21,6 +21,8 @@ public class InitListener implements ServletContextListener {
         ServletContext servletContext = sce.getServletContext();
         servletContext.setAttribute("path",servletContext.getContextPath());
         servletContext.setAttribute("upload",servletContext.getContextPath()+"/upload");
+        servletContext.setAttribute("js",servletContext.getContextPath()+"/js");
+        servletContext.setAttribute("css",servletContext.getContextPath()+"/css");
         servletContext.setAttribute("items",new ProductServiceImpl().findAllProduct());
     }
 

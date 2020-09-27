@@ -1,5 +1,6 @@
 package cn.uu710.web.servlet;
 
+import cn.uu710.domain.Cart;
 import cn.uu710.domain.Product;
 import cn.uu710.service.ProductService;
 import cn.uu710.service.impl.ProductServiceImpl;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -29,6 +31,7 @@ public class ProductServlet extends BaseServlet{
        return "/user/product/product.jsp";
 
     }
+
 
 /*
     public void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

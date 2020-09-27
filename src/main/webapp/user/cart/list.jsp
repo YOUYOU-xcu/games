@@ -140,7 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				</thead>
 				<tbody>
-					<form action="${root}/user/order/create" method="post">
+					<form action="${path}/u/createOrder" method="post">
 					<c:forEach items="${cartList}" var="cart">
 					<tr>
 						<td><input type="checkbox" class="chk" name="cartIds" value="${cart.id}"/></td>

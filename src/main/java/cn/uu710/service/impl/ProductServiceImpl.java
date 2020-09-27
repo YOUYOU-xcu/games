@@ -1,6 +1,7 @@
 package cn.uu710.service.impl;
 
 import cn.uu710.dao.impl.ProductDaoImpl;
+import cn.uu710.domain.Cart;
 import cn.uu710.domain.Product;
 import cn.uu710.service.ProductService;
 
@@ -23,5 +24,18 @@ public class ProductServiceImpl implements ProductService {
     public Product detailsOne(String id) {
         int i = Integer.parseInt(id);
         return productDao.detailsOne(i);
+    }
+
+    @Override
+    public List<Cart> findCart(String id) {
+        int i = Integer.parseInt(id);
+        return productDao.findCart(i);
+    }
+
+    @Override
+    public void addCart(String proId,int userId) {
+        int pid = Integer.parseInt(proId);
+
+        productDao.addCart(pid,userId);
     }
 }
