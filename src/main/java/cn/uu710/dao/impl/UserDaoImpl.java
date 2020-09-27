@@ -1,6 +1,7 @@
 package cn.uu710.dao.impl;
 
 import cn.uu710.dao.UserDao;
+import cn.uu710.domain.Cart;
 import cn.uu710.domain.Product;
 import cn.uu710.domain.User;
 import cn.uu710.utils.JDBCUtils;
@@ -19,6 +20,18 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
     private JdbcTemplate jt = new JdbcTemplate(JDBCUtils.getDataSource());
 
+
+    @Override
+    public List<Cart> findCart(int id) {
+        String sql = "select * from cart where users = ?";
+        try {
+            List<Cart> query = jt.query(sql, new BeanPropertyRowMapper<Cart>(Cart.class),id);
+            return query;
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     /**
      * 查询登录用户
      * @return

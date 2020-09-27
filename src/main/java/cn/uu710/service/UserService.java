@@ -1,7 +1,10 @@
 package cn.uu710.service;
 
+import cn.uu710.domain.Cart;
 import cn.uu710.domain.Product;
 import cn.uu710.domain.User;
+
+import java.util.List;
 
 /**
  * @version 1.0
@@ -11,4 +14,5 @@ import cn.uu710.domain.User;
 
 public interface UserService {
     User findOne(User u);
+    List<Cart> findCart(User user);
 }

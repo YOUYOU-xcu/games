@@ -15,6 +15,5 @@ public interface ProductService {
     List<Product> findAllProduct();
     Product detailsOne(String id);
 
-    List<Cart> findCart(String id);
     void addCart(String proId,int userId);
 }

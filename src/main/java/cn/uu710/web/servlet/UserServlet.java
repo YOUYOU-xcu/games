@@ -69,25 +69,18 @@ public class UserServlet extends BaseServlet {
         }
     }
 
-    public void cartList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String cartList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String findCart = request.getParameter("proId");
-        System.out.println("进来了findCart……"+findCart);
-        List<Cart> cartList = productService.findCart(findCart);
-        System.out.println("cartList======="+cartList);
+        User uu = (User) request.getSession().getAttribute("user");
+        List<Cart> cartList = userService.findCart(uu);
 
-        request.getSession().setAttribute("cartList",cartList);
-
+        request.setAttribute("cartList",cartList);
+        return "/user/cart/list.jsp";
     }
 
     public void orderList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String findCart = request.getParameter("proId");
-        System.out.println("进来了findCart……"+findCart);
-        List<Cart> cartList = productService.findCart(findCart);
-        System.out.println("cartList======="+cartList);
 
-        request.getSession().setAttribute("cartList",cartList);
 
     }
 
@@ -102,7 +95,7 @@ public class UserServlet extends BaseServlet {
         }
 
         String proId = request.getParameter("proId");
-        System.out.println("进来了proId……"+proId);
+//        System.out.println("进来了proId……"+proId);
         productService.addCart(proId, uu.getId());
         out.write("success");
 

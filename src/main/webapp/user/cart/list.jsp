@@ -144,7 +144,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<c:forEach items="${cartList}" var="cart">
 					<tr>
 						<td><input type="checkbox" class="chk" name="cartIds" value="${cart.id}"/></td>
-						<td><img src="${upload}/${cart.goodsimg}"/><span>${cart.goodsname}</span></td>
+						<td><img src="${upload}/${cart.proimg}"/><span>${cart.profullname}</span></td>
 						<td><span class="price">${cart.price}</span></td>
 						<td><input type="button" value="-"/><input type="text" value="${cart.num}"  class="inNum"/><input type="button" value="+" class="addNum"/><input type="hidden" value="${cart.id}"/></td>
 						<td><span class="subtotal"></span></td>

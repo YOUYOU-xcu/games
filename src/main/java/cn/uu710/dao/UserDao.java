@@ -1,6 +1,9 @@
 package cn.uu710.dao;
 
+import cn.uu710.domain.Cart;
 import cn.uu710.domain.User;
+
+import java.util.List;
 
 /**
  * @version 1.0
@@ -10,4 +13,5 @@ import cn.uu710.domain.User;
 
 public interface UserDao {
     User findOne(User u);
+    List<Cart> findCart(int id);
 }

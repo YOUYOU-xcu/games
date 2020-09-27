@@ -2,6 +2,7 @@ package cn.uu710.dao;
 
 import cn.uu710.domain.Cart;
 import cn.uu710.domain.Product;
+import cn.uu710.domain.User;
 
 import java.util.List;
 
@@ -16,7 +17,6 @@ public interface ProductDao {
 
    Product detailsOne(int id);
 
-   List<Cart> findCart(int id);
    void addCart(int proId,int userId);
 
 }

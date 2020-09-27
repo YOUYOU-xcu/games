@@ -27,12 +27,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Cart> findCart(String id) {
-        int i = Integer.parseInt(id);
-        return productDao.findCart(i);
-    }
-
-    @Override
     public void addCart(String proId,int userId) {
         int pid = Integer.parseInt(proId);
 

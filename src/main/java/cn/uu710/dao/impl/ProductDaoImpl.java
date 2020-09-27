@@ -3,6 +3,7 @@ package cn.uu710.dao.impl;
 import cn.uu710.dao.ProductDao;
 import cn.uu710.domain.Cart;
 import cn.uu710.domain.Product;
+import cn.uu710.domain.User;
 import cn.uu710.utils.JDBCUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -36,17 +37,6 @@ public class ProductDaoImpl implements ProductDao {
         return jt.queryForObject(sql,new BeanPropertyRowMapper<Product>(Product.class),id);
     }
 
-    @Override
-    public List<Cart> findCart(int id) {
-        String sql = "select * from cart where product = ?";
-        try {
-            List<Cart> query = jt.query(sql, new BeanPropertyRowMapper<Cart>(Cart.class));
-            return query;
-        } catch (DataAccessException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     @Override
     public void addCart(int proId,int userId) {
