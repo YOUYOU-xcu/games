@@ -148,7 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<form id="form" action="" method="post" onsubmit="return submitCheck()">
 					<c:forEach items="${cartList}" var="cart">
 					<tr>
-						<td><input type="checkbox" class="chk" name="cartIds" value="${cart.id}"/></td>
+						<td><input type="checkbox" class="chk" name="cartIds" value="${cart.id}"/>${cart.id}</td>
 						<td><img src="${upload}/${cart.proimg}"/><span>${cart.profullname}</span></td>
 						<td><span class="price">${cart.price}</span></td>
 						<td>
@@ -161,7 +161,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td><a href="javascript:deleteCartOne(${cart.id});">删除</a></td>
 					</tr>
 					</c:forEach>
-						<a href="javascript:conf"></a>
 				</tbody>
 
 				<tfoot>
@@ -186,8 +185,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   alert("请先选择商品进行结算")
 			   return false;
 		   }else {
+			//    var checkboxs = document.getElementsByName("cartIds");
+			//    var duoxuan="";
+			//    var a="";
+			//    for (var i=0;i<checkboxs.length;i++){
+			//    	alert(checkboxs[i].attr("value"))
+			//    	if (checkboxs[i].checked==true){
+			// 		a = checkboxs[i].value();
+			// 		duoxuan+="-"+a;
+			// 	}
+			//    }
+		   	// alert(duoxuan)
+			   var qx = $("input[name='cartIds']:checked").map(function () {
+				   return $(this).val();
+			   }).get().join(',');
+
+			   alert(qx)
+
 			   var f = document.getElementsByTagName("form")[0];
-			   f.action="${path}/u/createOrder?sum="+tol;
+			   f.action="${path}/u/createOrder?sum="+tol+"&qx="+qx;
 		   }
 	   }
 

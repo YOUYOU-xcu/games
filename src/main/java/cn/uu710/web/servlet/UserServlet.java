@@ -155,7 +155,10 @@ public class UserServlet extends BaseServlet {
 
         System.out.println(order.toString());
 //        调用方法，存入数据库
-        orderService.createOrder(order);
+//        orderService.createOrder(order);
+
+        String qx = request.getParameter("qx");
+        System.out.println("多选的："+qx);
 
 //        删除此用户的购物车内的信息
 //        userService.deleteCartAll(user.getId());
