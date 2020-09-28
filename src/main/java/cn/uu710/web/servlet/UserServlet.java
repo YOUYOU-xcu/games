@@ -155,25 +155,47 @@ public class UserServlet extends BaseServlet {
 
         System.out.println(order.toString());
 //        调用方法，存入数据库
-//        orderService.createOrder(order);
+        orderService.createOrder(order);
 
-        String qx = request.getParameter("qx");
-        System.out.println("多选的："+qx);
+        /**
+         * 获取用户的多选商品创建的订单所对应的商品
+         */
+        String duoxuan = request.getParameter("duoxuan");
+        System.out.println("用户正在创建订单的商品："+duoxuan);
+        String[] splitResult = duoxuan.split(",");
 
-//        删除此用户的购物车内的信息
-//        userService.deleteCartAll(user.getId());
 
-        System.out.println("成功创建订单……");
-
-/**        创建订单项
- *
- * 订单id
- * 商品id
- */
+        /**创建订单项
+         *
+         * 订单id
+         * 商品id
+         */
         OrderItem orderItem = new OrderItem();
+        //订单id，通过订单号查询
+        orderItem.setOrders(null);
+//        订单所对应的商品id，此时cart未删除，可查询到
+        orderItem.setProduct(null);
+//        订单所对应的商品id所对应的数量，此时cart未删除，可查询到
+        orderItem.setNum(null);
+//        订单所对应的商品id所对应的数量金额，此时cart未删除，可查询到，并计算
+        orderItem.setPrice(null);
+
+//        将订单项插入数据库
 
         //获取用户提交的订单包含的商品以及各个商品的数量
 
+
+        System.out.println("成功创建订单项……");
+
+        /**
+         * 删除此用户的购物车内的已经创建订单的购物商品信息
+         */
+        for (String cartIds:splitResult){
+            System.out.println("需要删除购物车里的这一项："+cartIds);
+            userService.deleteCartOne(cartIds);
+        }
+
+        System.out.println("成功创建订单……");
 
         /**
          * 订单创建完成之后跳转到用户订单页面
