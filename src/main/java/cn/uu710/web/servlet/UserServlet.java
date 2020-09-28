@@ -162,10 +162,20 @@ public class UserServlet extends BaseServlet {
 
         System.out.println("成功创建订单……");
 
-//        创建订单项
+/**        创建订单项
+ *
+ * 订单id
+ * 商品id
+ */
         OrderItem orderItem = new OrderItem();
 
         //获取用户提交的订单包含的商品以及各个商品的数量
+
+
+        /**
+         * 订单创建完成之后跳转到用户订单页面
+         */
+        response.sendRedirect(request.getContextPath()+"/u/orderList");
 
     }
 
@@ -204,15 +214,6 @@ public class UserServlet extends BaseServlet {
         response.sendRedirect(request.getContextPath()+"/u/cartList");
 
     }
-
-
-//    @Test
-//    void aaa() {
-//        String aaa = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-//        Date date = new Date();
-//
-//        System.out.println(date);
-//    }
 
 
 }
