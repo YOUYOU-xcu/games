@@ -49,7 +49,7 @@ public class OrderDaoImpl implements OrderDao {
         String sql = "select * from `order` where sn=?";
 
         try {
-            query = (Order) jt.query(sql, new BeanPropertyRowMapper<Order>(Order.class),sn);
+            query = jt.queryForObject(sql, new BeanPropertyRowMapper<Order>(Order.class),sn);
             System.out.println(query+"通过订单号查询订单数据");
             return query;
         } catch (DataAccessException e) {
@@ -64,7 +64,7 @@ public class OrderDaoImpl implements OrderDao {
         String sql = "select * from cart where id=?";
 
         try {
-            query = (Cart) jt.query(sql, new BeanPropertyRowMapper<Cart>(Cart.class), cartId);
+            query = jt.queryForObject(sql, new BeanPropertyRowMapper<Cart>(Cart.class),cartId);
             System.out.println(query+"通过购物id查询的购物数据");
             return query;
         } catch (DataAccessException e) {
@@ -75,6 +75,8 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void createOrderItem(OrderItem orderItem){
+        String sql = "insert into orderitem values(?,?,?,?,?)";
+        jt.update(sql,null,orderItem.getOrders(),orderItem.getProduct(),orderItem.getNum(),orderItem.getPrice());
 
     }
 

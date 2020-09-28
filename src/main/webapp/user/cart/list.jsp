@@ -148,7 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<form id="form" action="" method="post" onsubmit="return submitCheck()">
 					<c:forEach items="${cartList}" var="cart">
 					<tr>
-						<td><input type="checkbox" class="chk" name="cartIds" value="${cart.id}"/></td>
+						<td><input type="checkbox" class="chk" name="cartIds" value="${cart.id}"/>${cart.id}</td>
 						<td><img src="${upload}/${cart.proimg}"/><span>${cart.profullname}</span></td>
 						<td><span class="price">${cart.price}</span></td>
 						<td>
@@ -189,8 +189,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   return $(this).val();
 			   }).get().join(',');
 
-			   // alert(qx)
-
 			   var f = document.getElementsByTagName("form")[0];
 			   f.action="${path}/u/createOrder?sum="+tol+"&duoxuan="+duoxuan;
 		   }
@@ -201,11 +199,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  //减少一个商品
 	  function downOne(cartId,proId) {
 	  	var cartNum =$(".cartNum").attr("value");
-	  	if (cartNum==1){
+	  	alert("当前商品的数量为："+cartNum)
+	  	if (cartNum===1){
 	  		//判断商品数量是否为1，询问用户是否需要执行删除操作
-			if (confirm("您确定要删除此商品吗？")){
-				location.href="${path}/u/deleteCartOne?cartId="+cartId;
-			}
+			deleteCartOne(cartId);
+			return ;
 		}else {//数量不为1，正常减1
 			if (confirm("您确定要减少一个此商品吗？")){
 				location.href="${path}/u/downCartOne?proId="+proId;
@@ -221,10 +219,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  }
 	  }
 
-	  function deleteCartOne(obj) {
+	  function deleteCartOne(cartId) {
 		  if (confirm("您确定要删除此商品吗？")){
-
-			  location.href="${path}/u/deleteCartOne?cartId="+obj;
+			  location.href="${path}/u/deleteCartOne?cartId="+cartId;
 		  }
 	  }
 
