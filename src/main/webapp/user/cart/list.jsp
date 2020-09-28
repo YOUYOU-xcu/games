@@ -127,6 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  <a href="${path}">回到首页</a>
     <div id="content">
 			<table border="1" cellpadding="0" cellspacing="0">
 				<thead>
@@ -140,27 +141,84 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				</thead>
 				<tbody>
+
 					<form action="${path}/u/createOrder" method="post">
 					<c:forEach items="${cartList}" var="cart">
 					<tr>
 						<td><input type="checkbox" class="chk" name="cartIds" value="${cart.id}"/></td>
 						<td><img src="${upload}/${cart.proimg}"/><span>${cart.profullname}</span></td>
 						<td><span class="price">${cart.price}</span></td>
-						<td><input type="button" value="-"/><input type="text" value="${cart.num}"  class="inNum"/><input type="button" value="+" class="addNum"/><input type="hidden" value="${cart.id}"/></td>
+						<td>
+							<input type="button" value="-" onclick="downOne(${cart.id},${cart.product})"/>
+							<input type="text" value="${cart.num}" class="cartNum"/>
+							<input type="button" value="+" onclick="addOne(${cart.id},${cart.product})"/>
+							<input type="hidden" value="${cart.product}"  id="proId"/>
+						</td>
 						<td><span class="subtotal"></span></td>
-						<td><a href="#">删除</a></td>
+						<td><a href="javascript:deleteCartOne(${cart.id});">删除</a></td>
 					</tr>
 					</c:forEach>
-					
+						<a href="javascript:conf"></a>
 				</tbody>
 				<tfoot>
 				<tr>
 					<td colspan="5" >总计:<span id="sum">0.00</span></td>
 					<td id="td"><input type="submit" value="结算"/></td>
+<%--					<td id="clear"><a href="javascript:deleteCartAll;">清空购物车</a></td>--%>
 				</tr>
 				</form>
 				</tfoot>
 			</table>
 		</div>
   </body>
+
+  <script>
+
+
+	  //减少一个商品
+	  function downOne(cartId,proId) {
+	  	var cartNum =$(".cartNum").attr("value");
+	  	if (cartNum==1){
+	  		//判断商品数量是否为1，询问用户是否需要执行删除操作
+			if (confirm("您确定要删除此商品吗？")){
+				location.href="${path}/u/deleteCartOne?cartId="+cartId;
+			}
+		}else {//数量不为1，正常减1
+			if (confirm("您确定要减少一个此商品吗？")){
+				location.href="${path}/u/downCartOne?proId="+proId;
+			}
+		}
+
+	  }
+
+	  //增加一个商品
+	  function addOne(cartId,proId) {
+		  if (confirm("您确定要再次添加此商品吗？")){
+			  location.href="${path}/u/addCartOne?proId="+proId;
+		  }
+	  }
+
+
+
+
+
+
+	  function deleteCartOne(obj) {
+		  if (confirm("您确定要删除此商品吗？")){
+
+			  location.href="${path}/u/deleteCartOne?cartId="+obj;
+		  }
+	  }
+
+
+	  function deleteCartAll() {
+		  if (confirm("您确定要删除所有商品吗？")){
+			  location.href="${path}/u/deleteCartAll";
+		  }
+	  }
+
+
+
+  </script>
+
 </html>

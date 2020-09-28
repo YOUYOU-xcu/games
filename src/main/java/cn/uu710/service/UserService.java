@@ -15,4 +15,8 @@ import java.util.List;
 public interface UserService {
     User findOne(User u);
     List<Cart> findCart(User user);
+
+    void deleteCartOne(String cartId);
+
+    void deleteCartAll(int userId);
 }

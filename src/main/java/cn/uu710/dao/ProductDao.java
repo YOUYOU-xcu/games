@@ -19,4 +19,7 @@ public interface ProductDao {
 
    void addCart(int proId,int userId);
 
+   void addCartOne(int proId,int userId);
+
+   void downCartOne(int proId,int userId);
 }

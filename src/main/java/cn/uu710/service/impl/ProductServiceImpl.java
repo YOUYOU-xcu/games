@@ -32,4 +32,13 @@ public class ProductServiceImpl implements ProductService {
 
         productDao.addCart(pid,userId);
     }
+    @Override
+    public void addCartOne(int proId,int userId) {
+      productDao.addCartOne(proId,userId);
+    }
+
+    @Override
+    public void downCartOne(int proId,int userId) {
+      productDao.downCartOne(proId,userId);
+    }
 }

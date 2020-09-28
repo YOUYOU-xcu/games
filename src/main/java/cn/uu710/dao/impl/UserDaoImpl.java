@@ -19,7 +19,18 @@ import java.util.List;
 
 public class UserDaoImpl implements UserDao {
     private JdbcTemplate jt = new JdbcTemplate(JDBCUtils.getDataSource());
+    /**
+     * 用户删除商品
+     */
+    public void deleteCartOne(int cartId){
+        String sql = "delete from cart where id=?";
+        jt.update(sql,cartId);
 
+    }
+    public void deleteCartAll(int userId){
+        String sql = "delete from cart where users=?";
+        jt.update(sql,userId);
+    }
 
     @Override
     public List<Cart> findCart(int id) {

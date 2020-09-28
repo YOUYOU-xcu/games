@@ -26,4 +26,16 @@ public class UserServiceImpl implements UserService {
     public List<Cart> findCart(User user) {
         return userDao.findCart(user.getId());
     }
+
+    /**
+     * 用户删除商品
+     */
+    public void deleteCartOne(String cartId){
+        int i = Integer.parseInt(cartId);
+        userDao.deleteCartOne(i);
+
+    }
+    public void deleteCartAll(int userId){
+        userDao.deleteCartAll(userId);
+    }
 }

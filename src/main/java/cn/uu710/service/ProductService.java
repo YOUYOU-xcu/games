@@ -16,4 +16,8 @@ public interface ProductService {
     Product detailsOne(String id);
 
     void addCart(String proId,int userId);
+
+    void addCartOne(int proId,int userId);
+
+    void downCartOne(int proId,int userId);
 }

@@ -14,4 +14,10 @@ import java.util.List;
 public interface UserDao {
     User findOne(User u);
     List<Cart> findCart(int id);
+    /**
+     * 用户删除商品
+     */
+    void deleteCartOne(int cartId);
+
+    void deleteCartAll(int userId);
 }

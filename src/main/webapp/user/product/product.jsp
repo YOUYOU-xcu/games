@@ -103,14 +103,14 @@
 					</div>
 					<div id="edit">
 						<input type="hidden" value="${product.id}" id="proId"/>
-						<input type="button" id="addcart" value="加入购物车" onclick="add()"/>
+						<input type="button" id="addcart" value="加入购物车" onclick="addCart()"/>
 					</div>
 				</div>
 			</div>
 		</div>
   </body>
   <script type="text/javascript">
-	  function add() {
+	  function addCart() {
 		 var proId = $("#proId").attr("value");
 		  // alert(proId)
 		  $.ajax({
