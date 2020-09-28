@@ -44,26 +44,26 @@ public class ProductDaoImpl implements ProductDao {
         //从product表通过id查询此商品
         String sql1 ="select * from product where id=?";
         Product product = jt.queryForObject(sql1, new BeanPropertyRowMapper<Product>(Product.class), proId);
-        System.out.println("进来了……");
+        System.out.println("进来了……正在增加商品……");
         //插入此商品到购物车
 
         //查询此用户是否已有此商品，如果有则在原有基础上加1
-        String sql2 = "select * from cart where product=?";
 
         Cart cartIsExist = null;
         try {
+            String sql2 = "select * from cart where product=?";
             cartIsExist = jt.queryForObject(sql2, new BeanPropertyRowMapper<Cart>(Cart.class), proId);
+            System.out.println("cartIsExist:"+cartIsExist);
         } catch (DataAccessException e) {
-                String sql4 = "update cart set num=num+1 where users=? and product=?";
-                jt.update(sql4, userId,proId);
-        }
-        if (cartIsExist==null){
+            System.out.println("用户购物车内无此商品……正在向数据库内插入新数据");
             String sql3 = "insert into cart(proimg,profullname,price,num,users,product) values(?,?,?,?,?,?)";
             jt.update(sql3,product.getProimg(),product.getProfullname(),product.getProprice(),1,userId,product.getId());
-        }else {
+            return;
+        }
+            System.out.println("该用户的购物车内已存在此商品，可以直接加1");
             String sql4 = "update cart set num=num+1 where users=? and product=?";
             jt.update(sql4, userId,proId);
-        }
+
     }
     @Override
     public void addCartOne(int proId,int userId) {

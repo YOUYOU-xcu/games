@@ -97,9 +97,9 @@ public class UserServlet extends BaseServlet {
 
     public void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        System.out.println(request.getSession().getAttribute("user")+"正在执行添加购物车……");
-//        判断用户是否已经登录
         User uu = (User) request.getSession().getAttribute("user");
+        System.out.println(uu.getLoginname()+"正在尝试执行添加购物车……");
+//        判断用户是否已经登录
         if (uu==null){//未登录
             out.write("failure");
             return;
@@ -114,7 +114,7 @@ public class UserServlet extends BaseServlet {
      * 购物车内的数量增加与减少
      */
     public void addCartOne(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getSession().getAttribute("user")+"正在增加一个商品……");
+        System.out.println(request.getSession().getAttribute("user")+"正在尝试增加一个商品……");
         User uu = (User) request.getSession().getAttribute("user");
         String proId = request.getParameter("proId");
         int i = Integer.parseInt(proId);
@@ -160,7 +160,7 @@ public class UserServlet extends BaseServlet {
 //        orderService.createOrder(order);
 
 //        删除此用户的购物车内的信息
-//        userService.deleteCartAll(user.getId());
+        userService.deleteCartAll(user.getId());
 
 //        创建订单项
 //        OrderItem orderItem = new OrderItem();
@@ -186,23 +186,21 @@ public class UserServlet extends BaseServlet {
      * @throws ServletException
      * @throws IOException
      */
+    public void deleteCartAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("用户正在清空购物车");
+        User user = (User) request.getSession().getAttribute("user");
+        userService.deleteCartAll(user.getId());
+        response.sendRedirect(request.getContextPath()+"/u/cartList");
+    }
+
     public void deleteCartOne(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String cartId = request.getParameter("cartId");
-//        System.out.println("正在删除此商品==="+cartId);
         userService.deleteCartOne(cartId);
-//        System.out.println("已经删除了商品==="+cartId);
         response.sendRedirect(request.getContextPath()+"/u/cartList");
 
     }
-    public void deleteCartAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        User user = (User) request.getSession().getAttribute("user");
-        userService.deleteCartAll(user.getId());
-//        System.out.println("已经清空了购物车");
-        response.sendRedirect(request.getContextPath()+"/u/cartList");
-
-    }
 /*
 
     public void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

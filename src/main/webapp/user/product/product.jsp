@@ -86,7 +86,12 @@
   <body>
    	<div id="context">
    
-   	<a href="${path}">回到首页</a>|<a href="${path}/u/cartList">浏览购物车</a>
+   	<a href="${path}">回到首页</a>
+<c:if test="${not empty user}">
+	|<a href="${path}/u/cartList">浏览购物车</a>
+</c:if>
+
+
 			<div id="goods">
 				<div id="goods_img">
 					<img src="${upload}/${product.proimg}" id="main_img" /><br>

@@ -23,10 +23,9 @@ public class ProductServlet extends BaseServlet{
     public String detailsOne(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String id = request.getParameter("id");
-        System.out.println("进来了……"+id);
         Product product = productService.detailsOne(id);
         request.setAttribute("product",product);
-        System.out.println("本页商品为："+product);
+        System.out.println("用户正在浏览的商品为……"+product.getProname());
 
        return "/user/product/product.jsp";
 

@@ -129,7 +129,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <a href="${path}">回到首页</a>
     <div id="content">
-			<table border="1" cellpadding="0" cellspacing="0">
+		<c:if test="${empty cartList}">
+			购物车空空如也……
+		</c:if>
+		<c:if test="${not empty cartList}">
+		<table border="1" cellpadding="0" cellspacing="0">
 				<thead>
 				<tr>
 					<th><input type="checkbox" id="allChk"/>全选</th>
@@ -141,7 +145,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				</thead>
 				<tbody>
-
 					<form action="${path}/u/createOrder" method="post">
 					<c:forEach items="${cartList}" var="cart">
 					<tr>
@@ -160,6 +163,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</c:forEach>
 						<a href="javascript:conf"></a>
 				</tbody>
+
 				<tfoot>
 				<tr>
 					<td colspan="4" >总计:<span id="sum" name="sum1">0.00</span></td>
@@ -167,8 +171,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td id="clear"><a href="javascript:deleteCartAll();">清空购物车</a></td>
 				</tr>
 				</form>
+
 				</tfoot>
 			</table>
+		</c:if>
 		</div>
   </body>
 
