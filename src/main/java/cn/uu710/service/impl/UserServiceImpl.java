@@ -1,8 +1,11 @@
 package cn.uu710.service.impl;
 
+import cn.uu710.dao.OrderDao;
 import cn.uu710.dao.UserDao;
+import cn.uu710.dao.impl.OrderDaoImpl;
 import cn.uu710.dao.impl.UserDaoImpl;
 import cn.uu710.domain.Cart;
+import cn.uu710.domain.Order;
 import cn.uu710.domain.User;
 import cn.uu710.service.UserService;
 
@@ -15,7 +18,7 @@ import java.util.List;
  */
 
 public class UserServiceImpl implements UserService {
-
+    private OrderDao orderDao = new OrderDaoImpl();
     private UserDao userDao = new UserDaoImpl();
     @Override
     public User findOne(User u) {
@@ -37,5 +40,10 @@ public class UserServiceImpl implements UserService {
     }
     public void deleteCartAll(int userId){
         userDao.deleteCartAll(userId);
+    }
+
+    @Override
+    public List<Order> findOrder(User uu) {
+        return orderDao.findOrder(uu);
     }
 }

@@ -1,6 +1,7 @@
 package cn.uu710.service;
 
 import cn.uu710.domain.Cart;
+import cn.uu710.domain.Order;
 import cn.uu710.domain.Product;
 import cn.uu710.domain.User;
 
@@ -19,4 +20,6 @@ public interface UserService {
     void deleteCartOne(String cartId);
 
     void deleteCartAll(int userId);
+
+    List<Order> findOrder(User uu);
 }

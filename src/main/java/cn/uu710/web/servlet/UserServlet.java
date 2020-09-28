@@ -98,7 +98,7 @@ public class UserServlet extends BaseServlet {
     public void addCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         User uu = (User) request.getSession().getAttribute("user");
-        System.out.println(uu.getLoginname()+"正在尝试执行添加购物车……");
+        System.out.println(uu+"正在尝试执行添加购物车……");
 //        判断用户是否已经登录
         if (uu==null){//未登录
             out.write("failure");
@@ -148,35 +148,38 @@ public class UserServlet extends BaseServlet {
         order.setUsers(user.getId());//用户id
         order.setSn(UuidUtil.getUuid());//订单号
         order.setCreatedate(new Date());//创建订单时间
-        String sum = request.getParameter("sum");
-        System.out.println("sum总价为"+sum);
-        String sum1 = request.getParameter("sum1");
-        System.out.println("sum1总价为"+sum1);
+            String sum = request.getParameter("sum");
+            System.out.println("sum总价为"+sum);
+            double totalPrice = Double.parseDouble(sum);
+        order.setTotalprice(totalPrice);    //  总价
 
-//        double totalPrice = Double.parseDouble(sum);
-//        order.setTotalprice(totalPrice);    //  总价
-
+        System.out.println(order.toString());
 //        调用方法，存入数据库
-//        orderService.createOrder(order);
+        orderService.createOrder(order);
 
 //        删除此用户的购物车内的信息
-        userService.deleteCartAll(user.getId());
+//        userService.deleteCartAll(user.getId());
+
+        System.out.println("成功创建订单……");
 
 //        创建订单项
-//        OrderItem orderItem = new OrderItem();
-        System.out.println("成功创建订单……");
+        OrderItem orderItem = new OrderItem();
+
+        //获取用户提交的订单包含的商品以及各个商品的数量
 
     }
 
     public String orderList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         User uu = (User) request.getSession().getAttribute("user");
-        List<Cart> cartList = userService.findCart(uu);
+        List<Order> orders = userService.findOrder(uu);
+        if (orders==null){
+            return null;
+        }else {
+            request.setAttribute("orderList", orders);
 
-        request.setAttribute("orderList",cartList);
-
-        return "/user/order/list.jsp";
-
+            return "/user/order/list.jsp";
+        }
     }
 
     /**
@@ -201,13 +204,6 @@ public class UserServlet extends BaseServlet {
 
     }
 
-/*
-
-    public void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-    }
-*/
 
 //    @Test
 //    void aaa() {

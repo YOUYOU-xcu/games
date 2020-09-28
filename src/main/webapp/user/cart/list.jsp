@@ -145,7 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				</thead>
 				<tbody>
-					<form action="${path}/u/createOrder" method="post">
+					<form id="form" action="" method="post" onsubmit="return submitCheck()">
 					<c:forEach items="${cartList}" var="cart">
 					<tr>
 						<td><input type="checkbox" class="chk" name="cartIds" value="${cart.id}"/></td>
@@ -166,9 +166,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 				<tfoot>
 				<tr>
-					<td colspan="4" >总计:<span id="sum" name="sum1">0.00</span></td>
-					<td id="td"><input type="submit" value="结算"/></td>
-					<td id="clear"><a href="javascript:deleteCartAll();">清空购物车</a></td>
+					<td colspan="5" >总计:<span id="sum" name="sum">0.00</span></td>
+					<td id="td"><input type="submit" id="submit" value="结算"/></td>
+<%--					<td id="clear"><a href="javascript:deleteCartAll();">清空购物车</a></td>--%>
 				</tr>
 				</form>
 
@@ -179,6 +179,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </body>
 
   <script>
+
+	   function submitCheck(){
+		   var tol=$("#sum").text()
+		   if (tol==0){
+			   alert("请先选择商品进行结算")
+			   return false;
+		   }else {
+			   var f = document.getElementsByTagName("form")[0];
+			   f.action="${path}/u/createOrder?sum="+tol;
+		   }
+	   }
+
 
 
 	  //减少一个商品

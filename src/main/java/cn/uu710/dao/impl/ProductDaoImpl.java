@@ -51,8 +51,8 @@ public class ProductDaoImpl implements ProductDao {
 
         Cart cartIsExist = null;
         try {
-            String sql2 = "select * from cart where product=?";
-            cartIsExist = jt.queryForObject(sql2, new BeanPropertyRowMapper<Cart>(Cart.class), proId);
+            String sql2 = "select * from cart where users=? and product=?";
+            cartIsExist = jt.queryForObject(sql2, new BeanPropertyRowMapper<Cart>(Cart.class), userId,proId);
             System.out.println("cartIsExist:"+cartIsExist);
         } catch (DataAccessException e) {
             System.out.println("用户购物车内无此商品……正在向数据库内插入新数据");
@@ -61,8 +61,9 @@ public class ProductDaoImpl implements ProductDao {
             return;
         }
             System.out.println("该用户的购物车内已存在此商品，可以直接加1");
-            String sql4 = "update cart set num=num+1 where users=? and product=?";
-            jt.update(sql4, userId,proId);
+//            String sql4 = "update cart set num=num+1 where users=? and product=?";
+//            jt.update(sql4, userId,proId);
+        addCartOne(proId,userId);
 
     }
     @Override

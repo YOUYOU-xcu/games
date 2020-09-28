@@ -15,6 +15,18 @@ public class Order {
 
     private Integer status;
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", users=" + users +
+                ", sn='" + sn + '\'' +
+                ", totalprice=" + totalprice +
+                ", createdate=" + createdate +
+                ", status=" + status +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

@@ -1,5 +1,7 @@
 package cn.uu710.service.impl;
 
+import cn.uu710.dao.OrderDao;
+import cn.uu710.dao.impl.OrderDaoImpl;
 import cn.uu710.domain.Order;
 import cn.uu710.service.OrderService;
 
@@ -10,8 +12,9 @@ import cn.uu710.service.OrderService;
  */
 
 public class OrderServiceImpl implements OrderService {
+    private OrderDao orderDao = new OrderDaoImpl();
     @Override
     public void createOrder(Order order) {
-
+        orderDao.createOrder(order);
     }
 }
