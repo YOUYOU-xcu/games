@@ -1,12 +1,18 @@
 package cn.uu710.web.servlet;
 
 import cn.uu710.domain.Cart;
+import cn.uu710.domain.Order;
+import cn.uu710.domain.OrderItem;
 import cn.uu710.domain.User;
+import cn.uu710.service.OrderService;
 import cn.uu710.service.ProductService;
 import cn.uu710.service.UserService;
+import cn.uu710.service.impl.OrderServiceImpl;
 import cn.uu710.service.impl.ProductServiceImpl;
 import cn.uu710.service.impl.UserServiceImpl;
+import cn.uu710.utils.UuidUtil;
 import org.apache.commons.beanutils.BeanUtils;
+import org.junit.jupiter.api.Test;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +36,7 @@ public class UserServlet extends BaseServlet {
     private ProductService productService = new ProductServiceImpl();
     private UserService userService = new UserServiceImpl();
     private User user = new User();
+    private OrderService orderService = new OrderServiceImpl();
 
     public void checkLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -130,13 +139,41 @@ public class UserServlet extends BaseServlet {
      * @throws IOException
      */
     public void createOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         System.out.println("创建订单……");
+//        PrintWriter out = response.getWriter();
+        Order order = new Order();
+//        创建此用户的订单
+        User user = (User) request.getSession().getAttribute("user");
+
+        order.setUsers(user.getId());//用户id
+        order.setSn(UuidUtil.getUuid());//订单号
+        order.setCreatedate(new Date());//创建订单时间
+        String sum = request.getParameter("sum");
+        System.out.println("sum总价为"+sum);
+        String sum1 = request.getParameter("sum1");
+        System.out.println("sum1总价为"+sum1);
+
+//        double totalPrice = Double.parseDouble(sum);
+//        order.setTotalprice(totalPrice);    //  总价
+
+//        调用方法，存入数据库
+//        orderService.createOrder(order);
+
+//        删除此用户的购物车内的信息
+//        userService.deleteCartAll(user.getId());
+
+//        创建订单项
+//        OrderItem orderItem = new OrderItem();
+        System.out.println("成功创建订单……");
 
     }
 
     public String orderList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        User uu = (User) request.getSession().getAttribute("user");
+        List<Cart> cartList = userService.findCart(uu);
+
+        request.setAttribute("orderList",cartList);
 
         return "/user/order/list.jsp";
 
@@ -152,19 +189,17 @@ public class UserServlet extends BaseServlet {
     public void deleteCartOne(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String cartId = request.getParameter("cartId");
-        System.out.println("正在删除此商品==="+cartId);
+//        System.out.println("正在删除此商品==="+cartId);
         userService.deleteCartOne(cartId);
-        System.out.println("已经删除了商品==="+cartId);
+//        System.out.println("已经删除了商品==="+cartId);
         response.sendRedirect(request.getContextPath()+"/u/cartList");
 
     }
     public void deleteCartAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         User user = (User) request.getSession().getAttribute("user");
-
         userService.deleteCartAll(user.getId());
-        System.out.println("已经清空了购物车");
-
+//        System.out.println("已经清空了购物车");
         response.sendRedirect(request.getContextPath()+"/u/cartList");
 
     }
@@ -175,5 +210,14 @@ public class UserServlet extends BaseServlet {
 
     }
 */
+
+//    @Test
+//    void aaa() {
+//        String aaa = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+//        Date date = new Date();
+//
+//        System.out.println(date);
+//    }
+
 
 }

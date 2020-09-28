@@ -162,9 +162,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tbody>
 				<tfoot>
 				<tr>
-					<td colspan="5" >总计:<span id="sum">0.00</span></td>
+					<td colspan="4" >总计:<span id="sum" name="sum1">0.00</span></td>
 					<td id="td"><input type="submit" value="结算"/></td>
-<%--					<td id="clear"><a href="javascript:deleteCartAll;">清空购物车</a></td>--%>
+					<td id="clear"><a href="javascript:deleteCartAll();">清空购物车</a></td>
 				</tr>
 				</form>
 				</tfoot>
@@ -198,11 +198,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  }
 	  }
 
-
-
-
-
-
 	  function deleteCartOne(obj) {
 		  if (confirm("您确定要删除此商品吗？")){
 
@@ -210,14 +205,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  }
 	  }
 
-
 	  function deleteCartAll() {
 		  if (confirm("您确定要删除所有商品吗？")){
 			  location.href="${path}/u/deleteCartAll";
 		  }
 	  }
-
-
 
   </script>
 
