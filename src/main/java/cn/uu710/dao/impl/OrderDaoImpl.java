@@ -30,7 +30,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<Order> findOrder(User uu) {
         List<Order> query = null;
-        String sql = "select * from order where users=?";
+        String sql = "select * from `order` where users=?";
 
         try {
             query= jt.query(sql, new BeanPropertyRowMapper<>(Order.class), uu.getId());

@@ -173,6 +173,7 @@ public class UserServlet extends BaseServlet {
 
         User uu = (User) request.getSession().getAttribute("user");
         List<Order> orders = userService.findOrder(uu);
+
         if (orders==null){
             return null;
         }else {

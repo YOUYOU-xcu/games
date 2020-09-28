@@ -88,65 +88,22 @@
         }
     </style>
     <script type="text/javascript" src="<%=path%>/js/jquery.min.js"></script>
-    <script>
-      /*  // var numReg=/^([1-9][0-9]*){1,3}$/;
-        $(function(){
-            //计算小计 页面加载时计算
-            // 数量*单价=小计
-            function  countTotal(){//计算小计方法
-                var trArr=$("tbody").children();
-                for (var i=0;i<trArr.length;i++) {
-                    //数量 alert(trArr.eq(i).children().eq(3).children().eq(1).val())
-                    // 单价  alert(trArr.eq(i).children().eq(2).children().eq(0).text())
-                    trArr.eq(i).children().eq(4).children().eq(0).text((trArr.eq(i).children().eq(2).children().eq(0).text()*1*trArr.eq(i).children().eq(3).children().eq(1).val()*1).toFixed(2));
-                }
-            }
-
-            function countSum(){//计算总价
-                var trArr=$("tbody").children();
-                var sum=0;
-                for(var i=0;i<trArr.length;i++){
-                    if(trArr.eq(i).children().eq(0).children().eq(0).prop("checked")){
-                        sum+=(trArr.eq(i).children().eq(4).children().eq(0).text()*1);
-                    }
-
-                }
-                $("#sum").text(sum.toFixed(2))
-            }
-
-            countTotal();
-            countSum();//计算总价
-
-            $("#allChk").click(function(){
-                var chkArr=$(".chk");
-                for (var i=0;i<chkArr.length;i++) {
-                    chkArr.eq(i).prop("checked",$("#allChk").prop("checked"))
-                }
-                countSum();
-            });
-
-            $(".chk").click(function(){
-                countSum();
-            })
-        })*/
-    </script>
-
 
 </head>
 
 <body>
 <a href="${path}">回到首页</a>
 <div id="content">
-<%--    <c:if test="${empty cartList}">--%>
-<%--        您还没有创建过订单……--%>
-<%--    </c:if>--%>
-<%--    <c:if test="${not empty cartList}">--%>
-        <table border="1" cellpadding="0" cellspacing="0">
+    <c:if test="${empty orderList}">
+        您还没有创建过订单……
+    </c:if>
+    <c:if test="${not empty orderList}">
+       <table border="1" cellpadding="0" cellspacing="0">
             <thead>
             <tr>
 <%--                <th><input type="checkbox" id="allChk"/>全选</th>--%>
-                <th>商品id</th>
-                <th>所属用户</th>
+<%--                <th>商品id</th>--%>
+<%--                <th>所属用户</th>--%>
                 <th>订单号</th>
                 <th>订单总价</th>
                 <th>创建时间</th>
@@ -155,29 +112,31 @@
             </tr>
             </thead>
             <tbody>
-<%--                <c:forEach items="${orderList}" var="order">--%>
+
+                <c:forEach items="${orderList}" var="order">
                 <tr>
-                    <td>123456</td>
-                    <td>张三</td>
-                    <td>dagfkjgfg45541313</td>
-                    <td>6668元</td>
-                    <td><%=new Date()%></td>
-                    <td>未支付</td>
+<%--                    <td>${order.id}</td>--%>
+<%--                    <td>${order.users}</td>--%>
+                    <td>${order.sn}</td>
+                    <td>${order.totalprice}元</td>
+                    <td>${order.createdate}</td>
+
+                    <c:if test="${order.status eq 0}">
+                        <td><a href="javascript:void(0);"><font color="red">未支付，点击支付</font></a></td>
+                    </c:if>
+
+                    <c:if test="${order.status eq 1}">
+                        <td><font color="green">已支付</font></td>
+                    </c:if>
+
                 </tr>
-                <tr>
-                    <td>22</td>
-                    <td>33</td>
-                    <td>44</td>
-                    <td>55</td>
-                    <td>66</td>
-                </tr>
-<%--                </c:forEach>--%>
+                </c:forEach>
             </tbody>
             <tfoot>
 
             </tfoot>
         </table>
-<%--    </c:if>--%>
+    </c:if>
 </div>
 </body>
 
