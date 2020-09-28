@@ -1,6 +1,8 @@
 package cn.uu710.service;
 
+import cn.uu710.domain.Cart;
 import cn.uu710.domain.Order;
+import cn.uu710.domain.OrderItem;
 
 /**
  * @version 1.0
@@ -10,4 +12,7 @@ import cn.uu710.domain.Order;
 
 public interface OrderService {
     void createOrder(Order order);
+    Cart findCartByCartId(String cartId);
+    Order findOrderIdBySn(String sn);
+    void createOrderItem(OrderItem orderItem);
 }

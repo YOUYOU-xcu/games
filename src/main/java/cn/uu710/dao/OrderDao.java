@@ -1,6 +1,8 @@
 package cn.uu710.dao;
 
+import cn.uu710.domain.Cart;
 import cn.uu710.domain.Order;
+import cn.uu710.domain.OrderItem;
 import cn.uu710.domain.User;
 
 import java.util.List;
@@ -14,4 +16,10 @@ import java.util.List;
 public interface OrderDao {
     void createOrder(Order order);
     List<Order> findOrder(User uu);
+
+    Cart findCartByCartId(int cartId);
+    Order findOrderIdBySn(String sn);
+
+    void createOrderItem(OrderItem orderItem);
+
 }
