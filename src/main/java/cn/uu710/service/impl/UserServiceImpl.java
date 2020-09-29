@@ -46,4 +46,9 @@ public class UserServiceImpl implements UserService {
     public List<Order> findOrder(User uu) {
         return orderDao.findOrder(uu);
     }
+
+    @Override
+    public void toPay(String orderSn) {
+        orderDao.toPay(orderSn);
+    }
 }

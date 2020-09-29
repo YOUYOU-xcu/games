@@ -80,4 +80,10 @@ public class OrderDaoImpl implements OrderDao {
 
     }
 
+    @Override
+    public void toPay(String orderSn) {
+        String sql ="update `order` set status=1 where sn=?";
+        jt.update(sql,orderSn);
+    }
+
 }

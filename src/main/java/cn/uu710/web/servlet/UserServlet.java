@@ -38,6 +38,16 @@ public class UserServlet extends BaseServlet {
     private User user = new User();
     private OrderService orderService = new OrderServiceImpl();
 
+    public void toPay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/**
+ * 使用订单号修改订单状态
+ */
+        String orderSn = request.getParameter("orderSn");
+        userService.toPay(orderSn);
+        response.sendRedirect(request.getContextPath()+"/u/orderList");
+
+    }
+
     public void checkLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 

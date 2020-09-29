@@ -22,4 +22,6 @@ public interface OrderDao {
 
     void createOrderItem(OrderItem orderItem);
 
+    void toPay(String orderSn);
+
 }

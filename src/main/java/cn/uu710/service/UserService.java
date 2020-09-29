@@ -22,4 +22,6 @@ public interface UserService {
     void deleteCartAll(int userId);
 
     List<Order> findOrder(User uu);
+
+    void toPay(String orderSn);
 }
