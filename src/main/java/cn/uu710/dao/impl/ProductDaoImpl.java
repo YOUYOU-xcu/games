@@ -28,7 +28,7 @@ public class ProductDaoImpl implements ProductDao {
      */
     @Override
     public List<Product> findAllProduct() {
-        String sql = "select * from product";
+        String sql = "select * from product limit 0,10";
         return jt.query(sql, new BeanPropertyRowMapper<Product>(Product.class));
     }
 
