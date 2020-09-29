@@ -13,11 +13,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
-    <title>登录</title>
+    <title>用户登录</title>
     <link rel="stylesheet" href="${css}/pintuer.css">
     <link rel="stylesheet" href="${css}/admin.css">
-    <script src="js/jquery.js"></script>
-    <script src="js/pintuer.js"></script>
+    <script src="${js}/jquery.js"></script>
+    <script src="${js}/pintuer.js"></script>
 </head>
 <body>
 <div class="bg"></div>
@@ -27,13 +27,16 @@
             <div style="height:150px;"></div>
             <div class="media media-y margin-big-bottom">
             </div>
-            <form action="index.jsp" method="post">
+            <form action="${path}/a/checkLogin" method="post">
                 <div class="panel loginbox">
-                    <div class="text-center margin-big padding-big-top"><h1>后台管理中心</h1></div>
+                    <div class="text-center margin-big padding-big-top"><h1>管理员登录(暂时不校验验证码)</h1></div>
+                    <c:if test="${not empty errorMsg}">
+                        <div style="color: red" align="center">${errorMsg}</div>
+                    </c:if>
                     <div class="panel-body" style="padding:30px; padding-bottom:10px; padding-top:10px;">
                         <div class="form-group">
                             <div class="field field-icon-right">
-                                <input type="text" class="input input-big" name="name" placeholder="登录账号" data-validate="required:请填写账号" />
+                                <input type="text" class="input input-big" name="loginname" placeholder="登录账号" data-validate="required:请填写账号" value="${loginname}" />
                                 <span class="icon icon-user margin-small"></span>
                             </div>
                         </div>
@@ -45,9 +48,9 @@
                         </div>
                         <div class="form-group">
                             <div class="field">
-                                <input type="text" class="input input-big" name="code" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
+                                <%--data-validate="required:请填写右侧的验证码"--%>
+                                <input type="text" class="input input-big" name="code" placeholder="填写右侧的验证码" />
                                 <img src="${path}/checkCodeServlet" alt="" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;" onclick="this.src=this.src+'?'">
-
                             </div>
                         </div>
                     </div>

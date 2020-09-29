@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author： 张佑
  * @date： 2020-09-27 11:06
  */
-//@WebFilter("/*")
+@WebFilter("/*")
 public class EncodingFilter implements Filter {
 
     @Override
@@ -20,17 +20,21 @@ public class EncodingFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain) throws IOException, ServletException {
 
+        //将父接口转为子接口
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) resp;
+        //获取请求方法
+        String method = request.getMethod();
+        //解决post请求中文数据乱码问题
+        if(method.equalsIgnoreCase("post")){
+            request.setCharacterEncoding("utf-8");
+        }
+        //处理响应乱码
+        response.setContentType("text/html;charset=utf-8");
+        filterChain.doFilter(request,response);
 
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse resp = (HttpServletResponse) response;
-
-        req.setCharacterEncoding("utf-8");
-        resp.setContentType("text/html;charset=utf-8");
-
-//        放行
-        chain.doFilter(req,resp);
     }
 
     @Override

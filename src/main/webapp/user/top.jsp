@@ -28,7 +28,8 @@
    				<c:if test="${empty user}">
    					<div>
 						<a href="${path}/user/login.jsp">[登录]</a>&emsp;
-						<a href="${path}/user/regist.jsp">[注册]</a>
+						<a href="${path}/user/regist.jsp">[注册]</a>&emsp;
+						<a href="${path}/a/index">[管理员入口]</a>
 					</div>
    				</c:if>
    					<c:if test="${not empty user}">
