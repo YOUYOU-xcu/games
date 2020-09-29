@@ -36,7 +36,7 @@
                     <div class="panel-body" style="padding:30px; padding-bottom:10px; padding-top:10px;">
                         <div class="form-group">
                             <div class="field field-icon-right">
-                                <input type="text" class="input input-big" name="loginname" placeholder="登录账号" data-validate="required:请填写账号" />
+                                <input type="text" class="input input-big" name="loginname" placeholder="登录账号" data-validate="required:请填写账号" value="${loginname}" />
                                 <span class="icon icon-user margin-small"></span>
                             </div>
                         </div>

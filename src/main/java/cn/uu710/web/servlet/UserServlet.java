@@ -50,8 +50,6 @@ public class UserServlet extends BaseServlet {
 
     public void checkLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-
         String loginname = request.getParameter("loginname");
         String password = request.getParameter("password");
         user.setLoginname(loginname);
@@ -65,6 +63,7 @@ public class UserServlet extends BaseServlet {
             response.sendRedirect(request.getContextPath());
         }else {
             request.setAttribute("errorMsg", "用户名或密码错误，请重新输入");
+            request.setAttribute("loginname",loginname);
             request.getRequestDispatcher("/user/login.jsp").forward(request, response);
         }
 
