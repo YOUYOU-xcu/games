@@ -47,19 +47,19 @@ CREATE TABLE `cart` (
   KEY `product` (`product`),
   CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`users`) REFERENCES `user` (`id`),
   CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`product`) REFERENCES `product` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
 /*Data for the table `cart` */
 
-insert  into `cart`(`id`,`proimg`,`profullname`,`price`,`num`,`users`,`product`) values (5,'hy2.jpg','R星GTA5后2大团队合力打造-2018最受期待游戏之一',560,1,5,16),(6,'shwj6.jpg','生化危机第6部(部分平台)',300,1,5,12),(8,'mgmr.jpg','美国末日PS3独占2016年-IGN满分神作(PS独占)',400,1,4,10),(9,'lzcyz.jpg','龙珠超宇宙PS独占2017',300,1,4,8);
+insert  into `cart`(`id`,`proimg`,`profullname`,`price`,`num`,`users`,`product`) values (53,'sldd.jpg','杀戮地带3(全平台)',300,1,5,13),(54,'zzhx.jpg','最终幻想14(全平台)',280,2,5,14);
 
 /*Table structure for table `order` */
 
 DROP TABLE IF EXISTS `order`;
 
 CREATE TABLE `order` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `users` int(11) DEFAULT NULL,
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `users` int(255) DEFAULT NULL,
   `sn` varchar(255) DEFAULT NULL,
   `totalPrice` double DEFAULT NULL,
   `createdate` datetime DEFAULT NULL,
@@ -67,11 +67,11 @@ CREATE TABLE `order` (
   PRIMARY KEY (`id`),
   KEY `users` (`users`),
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`users`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 /*Data for the table `order` */
 
-insert  into `order`(`id`,`users`,`sn`,`totalPrice`,`createdate`,`status`) values (1,4,'201910251557',4060,'2019-10-25 16:52:22',100),(2,4,'201910251557',2160,'2019-10-28 10:35:31',100),(3,4,'201910251557',3900,'2020-09-27 09:05:22',100);
+insert  into `order`(`id`,`users`,`sn`,`totalPrice`,`createdate`,`status`) values (10,4,'a76d195cd9934eda9756016dc2fd4631',1580,'2020-09-28 14:18:56',0),(11,4,'defde1b4fa1d497ba22c1964f5668120',560,'2020-09-29 06:43:15',0),(12,4,'b30b1b5b4e5f4b348b31b024dbde8f1e',1200,'2020-09-29 06:43:42',0);
 
 /*Table structure for table `orderitem` */
 
@@ -88,11 +88,11 @@ CREATE TABLE `orderitem` (
   KEY `product` (`product`),
   CONSTRAINT `orderitem_ibfk_1` FOREIGN KEY (`orders`) REFERENCES `order` (`id`),
   CONSTRAINT `orderitem_ibfk_2` FOREIGN KEY (`product`) REFERENCES `product` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 /*Data for the table `orderitem` */
 
-insert  into `orderitem`(`id`,`orders`,`product`,`num`,`price`) values (1,1,10,8,400),(2,1,12,1,300),(3,1,16,1,560),(4,2,14,2,280),(5,2,10,4,400),(6,3,8,13,300);
+insert  into `orderitem`(`id`,`orders`,`product`,`num`,`price`) values (7,10,11,1,300),(8,10,15,1,480),(9,10,10,2,800),(10,11,14,2,560),(11,12,10,3,1200);
 
 /*Table structure for table `product` */
 
@@ -144,11 +144,11 @@ CREATE TABLE `user` (
   `phone` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`loginname`,`pwd`,`username`,`phone`,`address`) values (4,'aaa','aaa','你妹','123456789','北京市'),(5,'bbb','bbb','hello','','');
+insert  into `user`(`id`,`loginname`,`pwd`,`username`,`phone`,`address`) values (4,'aaa','aaa','你妹','123456789','北京市'),(5,'bbb','bbb','hello','',''),(6,'ccc','ccc','哈哈哈',NULL,NULL),(7,'ddd','ddd','小明',NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

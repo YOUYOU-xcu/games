@@ -152,17 +152,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td><img src="${upload}/${cart.proimg}"/><span>${cart.profullname}</span></td>
 						<td><span class="price">${cart.price}</span></td>
 						<td>
-							<input type="button" value="-" onclick="downOne(${cart.id},${cart.product})"/>
-							<input type="text" value="${cart.num}" class="cartNum"/>
-							<input type="button" value="+" onclick="addOne(${cart.id},${cart.product})"/>
-							<input type="hidden" value="${cart.product}"  id="proId"/>
+							<input type="button" value="-" class="downOne"/>
+							<input type="text" value="${cart.num}" class="cartNum" disabled/>
+							<input type="button" value="+" onclick="addOne(${cart.product})"/>
+                            <input type="hidden" value="${cart.id}" class="cartId"/>
+							<input type="hidden" value="${cart.product}" class="proId"/>
 						</td>
 						<td><span class="subtotal"></span></td>
 						<td><a href="javascript:deleteCartOne(${cart.id});">删除</a></td>
 					</tr>
 					</c:forEach>
 				</tbody>
-
 				<tfoot>
 				<tr>
 					<td colspan="5" >总计:<span id="sum" name="sum">0.00</span></td>
@@ -194,26 +194,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   }
 	   }
 
-
-
 	  //减少一个商品
-	  function downOne(cartId,proId) {
-	  	var cartNum =$(".cartNum").attr("value");
-	  	alert("当前商品的数量为："+cartNum)
-	  	if (cartNum===1){
-	  		//判断商品数量是否为1，询问用户是否需要执行删除操作
-			deleteCartOne(cartId);
-			return ;
-		}else {//数量不为1，正常减1
-			if (confirm("您确定要减少一个此商品吗？")){
-				location.href="${path}/u/downCartOne?proId="+proId;
-			}
-		}
 
-	  }
+       $(".downOne").click(function () {
+           var cartNum = $(this).parent().children(".cartNum").val();
+           var cartId = $(this).parent().children(".cartId").val();
+           var proId = $(this).parent().children(".proId").val();
+
+           // alert("购物车"+cartId+"的商品+"+proId+"+的数量为："+cartNum)
+
+           if (cartNum==1){
+               //判断商品数量是否为1，询问用户是否需要执行删除操作
+               deleteCartOne(cartId);
+               return ;
+           }else {//数量不为1，正常减1
+               if (confirm("您确定要减少一个此商品吗？")){
+                   location.href="${path}/u/downCartOne?proId="+proId;
+               }
+           }
+       })
+
 
 	  //增加一个商品
-	  function addOne(cartId,proId) {
+	  function addOne(proId) {
 		  if (confirm("您确定要再次添加此商品吗？")){
 			  location.href="${path}/u/addCartOne?proId="+proId;
 		  }
