@@ -26,10 +26,10 @@ public class BaseServlet extends HttpServlet {
         try {
 //            获取子类，创建子类或者调用子类的对象，this代表的是子类对象
             String requestURI = request.getRequestURI();
-//            System.out.println("requestURI是===="+requestURI);
+            System.out.println("requestURI是===="+requestURI);
 //           获取请求方法
             String methodName = requestURI.substring(requestURI.lastIndexOf("/") + 1);
-//            System.out.println("methodName是===="+methodName);
+            System.out.println("methodName是===="+methodName);
 //            获取方法对象
 //            System.out.println("this是"+this);
             Method method = this.getClass().getMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);

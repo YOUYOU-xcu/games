@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author： 张佑
  * @date： 2020-09-27 11:41
  */
-@WebServlet("/admin/*")
+//@WebServlet("/a/*")
 public class AdminServlet extends BaseServlet {
     public void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
