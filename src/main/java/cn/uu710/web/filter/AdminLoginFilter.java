@@ -35,9 +35,10 @@ public class AdminLoginFilter implements Filter {
         Admin admin = (Admin) req.getSession().getAttribute("admin");
 
         String uri = req.getRequestURI();
+        System.out.println("过滤器是否过滤："+uri);
         if (uri.contains("/login.jsp")|| uri.contains("/css")
                 || uri.contains("/js") || uri.contains("/checkCodeServlet")
-                || uri.contains("/login")){
+                || uri.contains("/img")){
             //放行
             chain.doFilter(req, resp);
         }else {
@@ -46,7 +47,7 @@ public class AdminLoginFilter implements Filter {
                 chain.doFilter(req, resp);
             } else {
                 //跳转到登录界面
-                request.setAttribute("msg", "没有权限,请先登录!");
+                request.setAttribute("errorMsg", "请登录!");
                 request.getRequestDispatcher("/admin/login.jsp").forward(request, response);
             }
         }
