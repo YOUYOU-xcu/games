@@ -27,6 +27,7 @@ public class EncodingFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) resp;
         //获取请求方法
         String method = request.getMethod();
+        System.out.println("过滤器过滤的方法："+method);
         //解决post请求中文数据乱码问题
         if(method.equalsIgnoreCase("post")){
             request.setCharacterEncoding("utf-8");
