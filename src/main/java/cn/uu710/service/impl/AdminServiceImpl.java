@@ -18,5 +18,10 @@ public class AdminServiceImpl implements AdminService {
         return adminDao.findAdmin(admin);
     }
 
+    @Override
+    public boolean updateAdmin(Admin admin) {
+        return adminDao.updateAdmin(admin);
+    }
+
 
 }

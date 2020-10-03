@@ -58,5 +58,39 @@ public class AdminServlet extends BaseServlet {
         response.sendRedirect(request.getContextPath());
     }
 
+    /**
+     * 管理员修改个人密码
+     */
+    public void updatePass(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        String mpass = request.getParameter("mpass");
+
+        System.out.println(mpass.equals(admin.getPwd()));
+
+        if (mpass.equals(admin.getPwd())){
+            System.out.println("可以更改密码");
+            String newpass = request.getParameter("newpass");
+            String renewpass = request.getParameter("renewpass");
+
+            if (! newpass.equals(renewpass)){
+                response.getWriter().write("密码填写有误……");
+                return;
+            }
+
+            admin.setPwd(renewpass);
+            boolean b = adminService.updateAdmin(admin);
+
+            if (!b){
+                response.getWriter().write("密码填写有误……");
+                return;
+            }
+            response.getWriter().write("修改成功……");
+            response.sendRedirect(request.getContextPath());
+            return;
+        }
+
+         response.getWriter().write("密码填写有误……");
+    }
 
 }

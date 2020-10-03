@@ -35,4 +35,14 @@ public class AdminDaoImpl implements AdminDao {
         return admin1;
 
     }
+
+    @Override
+    public boolean updateAdmin(Admin admin) {
+        String sql = "update admin set pwd=? where loginname=?";
+        int update = jt.update(sql,admin.getPwd(), admin.getLoginname());
+        if (update>0){
+            return true;
+        }
+        return false;
+    }
 }

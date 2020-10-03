@@ -35,7 +35,7 @@ public class AdminLoginFilter implements Filter {
         Admin admin = (Admin) req.getSession().getAttribute("admin");
 
         String uri = req.getRequestURI();
-        System.out.println("过滤器是否过滤："+uri);
+//        System.out.println("过滤器是否过滤："+uri);
         if (uri.contains("/login.jsp")|| uri.contains("/css")
                 || uri.contains("/js") || uri.contains("/checkCodeServlet")
                 || uri.contains("/img")){

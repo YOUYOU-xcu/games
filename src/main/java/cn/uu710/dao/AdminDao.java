@@ -10,5 +10,6 @@ import cn.uu710.domain.Admin;
 
 public interface AdminDao {
     Admin findAdmin(Admin admin);
+    boolean updateAdmin(Admin admin);
 
 }
