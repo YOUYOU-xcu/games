@@ -2,10 +2,13 @@ package cn.uu710.dao.impl;
 
 import cn.uu710.dao.AdminDao;
 import cn.uu710.domain.Admin;
+import cn.uu710.domain.Product;
 import cn.uu710.utils.JDBCUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.util.Date;
 
 /**
  * @version 1.0
@@ -44,5 +47,20 @@ public class AdminDaoImpl implements AdminDao {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean addProduct(Product product) {
+        String sql = "insert into product values(?,?,?,?,?,?,?,?,?,?,?)";
+        int update = jt.update(sql, null, product.getProname(),
+                product.getProsn(), product.getProprice(),
+                product.getPronum(), product.getProimg(),
+                null, product.getProfullname(),
+                product.getUnit(), new Date(), 0);
+        if (update>0){
+            return true;
+        }else {
+            return false;
+        }
     }
 }

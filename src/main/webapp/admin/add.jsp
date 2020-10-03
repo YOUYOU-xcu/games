@@ -20,139 +20,84 @@ Time: 16:16
 <script src="${js}/pintuer.js"></script>
 </head>
 <body>
+
 <div class="panel admin-panel">
-  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
+  <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加商品</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="">  
+    <form method="post" class="form-x" action="${path}/a/addProduct" enctype="multipart/form-data">
       <div class="form-group">
         <div class="label">
-          <label>标题：</label>
+          <label>商品名称：</label>
         </div>
         <div class="field">
-          <input type="text" class="input w50" value="" name="title" data-validate="required:请输入标题" />
+          <input type="text" class="input w50" value="" name="proname" data-validate="required:请输入商品名称" />
           <div class="tips"></div>
         </div>
       </div>
       <div class="form-group">
         <div class="label">
-          <label>图片：</label>
+          <label>商品编号：</label>
         </div>
         <div class="field">
-          <input type="text" id="url1" name="img" class="input tips" style="width:25%; float:left;"  value=""  data-toggle="hover" data-place="right" data-image="" />
-          <input type="button" class="button bg-blue margin-left" id="image1" value="+ 浏览上传"  style="float:left;">
+          <input type="text" class="input w50" value="" name="prosn" data-validate="required:请输入编号，例如P001" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>商品价格：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="" name="proprice" data-validate="required:请输入商品价格" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>商品数量：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="" name="pronum" data-validate="required:请输入商品数量" />
+          <div class="tips"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label>商品图片：</label>
+        </div>
+        <div class="field">
+          <input type="file" name="image" class="button bg-blue margin-left" id="proimg" value="+ 浏览上传"  style="float:left;">
           <div class="tipss">图片尺寸：500*500</div>
         </div>
-      </div>     
-      
-      <if condition="$iscid eq 1">
-        <div class="form-group">
-          <div class="label">
-            <label>分类标题：</label>
-          </div>
-          <div class="field">
-            <select name="cid" class="input w50">
-              <option value="">请选择分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-            </select>
-            <div class="tips"></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="label">
-            <label>其他属性：</label>
-          </div>
-          <div class="field" style="padding-top:8px;"> 
-            首页 <input id="ishome"  type="checkbox" />
-            推荐 <input id="isvouch"  type="checkbox" />
-            置顶 <input id="istop"  type="checkbox" /> 
-         
-          </div>
-        </div>
-      </if>
-      <div class="form-group">
+      </div>
+<%--      <div class="form-group">
         <div class="label">
-          <label>描述：</label>
+          <label>商品描述：</label>
         </div>
         <div class="field">
-          <textarea class="input" name="note" style=" height:90px;"></textarea>
+          <textarea class="input" name="desc" style=" height:90px;" disabled></textarea>
+          <div class="tips"></div>
+        </div>
+      </div>--%>
+      <div class="form-group">
+        <div class="label">
+          <label>商品全称：</label>
+        </div>
+        <div class="field">
+          <input type="text" class="input w50" value="" name="profullname" data-validate="required:请输入商品全称" />
           <div class="tips"></div>
         </div>
       </div>
       <div class="form-group">
         <div class="label">
-          <label>内容：</label>
+          <label>商品单位：</label>
         </div>
         <div class="field">
-          <textarea name="content" class="input" style="height:450px; border:1px solid #ddd;"></textarea>
+          <input type="text" class="input w50" value="" name="unit" data-validate="required:请输入单位，例如个、件……" />
           <div class="tips"></div>
         </div>
       </div>
-     
-      <div class="clear"></div>
-      <div class="form-group">
-        <div class="label">
-          <label>关键字标题：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_title" value="" />
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>内容关键字：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_keywords" value=""/>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>关键字描述：</label>
-        </div>
-        <div class="field">
-          <textarea type="text" class="input" name="s_desc" style="height:80px;"></textarea>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>排序：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" name="sort" value="0"  data-validate="number:排序必须为数字" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>发布时间：</label>
-        </div>
-        <div class="field"> 
-          <script src="js/laydate/laydate.js"></script>
-          <input type="text" class="laydate-icon input w50" name="datetime" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value=""  data-validate="required:日期不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>作者：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" name="authour" value=""  />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>点击次数：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" name="views" value="" data-validate="member:只能为数字"  />
-          <div class="tips"></div>
-        </div>
-      </div>
+
       <div class="form-group">
         <div class="label">
           <label></label>

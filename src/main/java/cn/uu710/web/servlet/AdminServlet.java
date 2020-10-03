@@ -1,15 +1,18 @@
 package cn.uu710.web.servlet;
 
 import cn.uu710.domain.Admin;
-import cn.uu710.domain.User;
+import cn.uu710.domain.Product;
 import cn.uu710.service.AdminService;
 import cn.uu710.service.impl.AdminServiceImpl;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
+import java.util.UUID;
 
 /**
  * @version 1.0
@@ -17,9 +20,59 @@ import java.io.IOException;
  * @date： 2020-09-27 11:41
  */
 @WebServlet("/a/*")
+@MultipartConfig
 public class AdminServlet extends BaseServlet {
 
     private AdminService adminService = new AdminServiceImpl();
+
+    /**
+     * 添加商品
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void addProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        System.out.println("添加商品………………");
+        Product p = new Product();
+        /**
+         * 处理图片的上传
+         */
+        String path = getServletContext().getRealPath("/")+"upload";
+        Part part = request.getPart("image");
+        //获取请求头信息
+        String header = part.getHeader("Content-Disposition");
+        System.out.println(header);
+        String filename = header.substring(header.lastIndexOf("=") + 2, header.length() - 1);
+            System.out.println(filename);
+        //从文件名称中截取文件后缀名abc.txt
+        String suffix = filename.substring(filename.lastIndexOf("."));
+
+        //存储的位置需要固定   存储到项目的发布路径下以便访问
+        String newFileName = UUID.randomUUID().toString().replaceAll("-","")+suffix;
+        part.write(path+"/"+filename);
+
+        p.setProname(request.getParameter("proname"));
+        p.setProsn(request.getParameter("prosn"));
+        p.setProprice(Double.parseDouble(request.getParameter("proprice")));
+        p.setPronum(Integer.parseInt(request.getParameter("pronum")));
+//             System.out.println("proimg::::"+request.getParameter("proimg"));
+        p.setProimg(newFileName);
+//        p.setDesc(request.getParameter("desc"));
+        p.setProfullname(request.getParameter("profullname"));
+        p.setUnit(request.getParameter("unit"));
+
+        System.out.println("准备添加的商品是："+p);
+
+        boolean b = adminService.addProduct(p);
+        if (b){
+            response.getWriter().write("添加成功");
+        }else {
+            response.getWriter().write("添加失败");
+        }
+
+    }
+
 
     public void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

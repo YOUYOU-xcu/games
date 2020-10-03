@@ -3,6 +3,7 @@ package cn.uu710.service.impl;
 import cn.uu710.dao.AdminDao;
 import cn.uu710.dao.impl.AdminDaoImpl;
 import cn.uu710.domain.Admin;
+import cn.uu710.domain.Product;
 import cn.uu710.service.AdminService;
 
 /**
@@ -21,6 +22,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public boolean updateAdmin(Admin admin) {
         return adminDao.updateAdmin(admin);
+    }
+
+    @Override
+    public boolean addProduct(Product product) {
+       return adminDao.addProduct(product);
     }
 
 

@@ -25,6 +25,40 @@ public class Product {
 
     private String desc;
 
+    public Product() {
+    }
+
+    public Product(Integer id, String proname, String prosn, Double proprice, Integer pronum, String proimg, String profullname, String unit, Date createdate, Integer status, String desc) {
+        this.id = id;
+        this.proname = proname;
+        this.prosn = prosn;
+        this.proprice = proprice;
+        this.pronum = pronum;
+        this.proimg = proimg;
+        this.profullname = profullname;
+        this.unit = unit;
+        this.createdate = createdate;
+        this.status = status;
+        this.desc = desc;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", proname='" + proname + '\'' +
+                ", prosn='" + prosn + '\'' +
+                ", proprice=" + proprice +
+                ", pronum=" + pronum +
+                ", proimg='" + proimg + '\'' +
+                ", profullname='" + profullname + '\'' +
+                ", unit='" + unit + '\'' +
+                ", createdate=" + createdate +
+                ", status=" + status +
+                ", desc='" + desc + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }
